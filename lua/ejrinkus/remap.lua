@@ -7,12 +7,10 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
+-- Open a terminal
+vim.keymap.set('n', '<C-t>', '<cmd>terminal<cr>', { desc = 'Open Terminal' })
+
+-- Additional keybind (press ESC twice) to exit terminal mode.  C-\ C-n is the usual way.
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
@@ -31,5 +29,17 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Navigate files
-vim.keymap.set('n', '<leader>ex', vim.cmd.Ex)
-vim.keymap.set('n', '<leader>ec', ':e %:h/')
+vim.keymap.set('n', '<leader>ex', vim.cmd.Ex, { desc = 'File [Ex]plorer' })
+vim.keymap.set('n', '<leader>ec', ':e %:h/', { desc = "[E]dit file in [c]urrent file's directory" })
+
+-- Navigate buffers
+vim.keymap.set('n', '<leader>bn', vim.cmd.bnext, { desc = '[B]uffer [N]ext' })
+vim.keymap.set('n', '<leader>bp', vim.cmd.bprev, { desc = '[B]uffer [P]rev' })
+vim.keymap.set('n', '<leader>bd', vim.cmd.bdelete, { desc = '[B]uffer [D]elete' })
+
+-- Terminal multiplexer integration
+vim.keymap.set({ 'n', 't' }, '<A-h>', '<cmd>NavigatorLeft<cr>', { desc = 'Multiplexer: left pane' })
+vim.keymap.set({ 'n', 't' }, '<A-l>', '<cmd>NavigatorRight<cr>', { desc = 'Multiplexer: right pane' })
+vim.keymap.set({ 'n', 't' }, '<A-k>', '<cmd>NavigatorUp<cr>', { desc = 'Multiplexer: upper pane' })
+vim.keymap.set({ 'n', 't' }, '<A-j>', '<cmd>NavigatorDown<cr>', { desc = 'Multiplexer: lower pane' })
+vim.keymap.set({ 'n', 't' }, '<A-p>', '<cmd>NavigatorPrevious<cr>', { desc = 'Multiplexer: previous pane' })
