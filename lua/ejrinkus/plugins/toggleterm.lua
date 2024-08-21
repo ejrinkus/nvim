@@ -5,7 +5,7 @@ return {
     require('toggleterm').setup {
       size = 20,
       direction = 'horizontal',
-      open_mapping = [[<c-t>]],
+      open_mapping = [[<leader>ot]],
       insert_mappings = false,
       terminal_mappings = false,
       close_on_exit = true,

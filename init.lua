@@ -15,6 +15,37 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+local neotree_is_open = function()
+  local manager = require 'neo-tree.sources.manager'
+  local renderer = require 'neo-tree.ui.renderer'
+  local state = manager.get_state 'filesystem'
+  return renderer.window_exists(state)
+end
+
+-- :q behave as usual when tree is visible
+vim.api.nvim_create_autocmd('QuitPre', {
+  nested = false,
+  callback = function(e)
+    -- Nothing to do if tree is not opened
+    if not neotree_is_open() then
+      return
+    end
+
+    -- How many focusable windows do we have? (excluding e.g. incline status window)
+    local winCount = 0
+    for _, winId in ipairs(vim.api.nvim_list_wins()) do
+      if vim.api.nvim_win_get_config(winId).focusable then
+        winCount = winCount + 1
+      end
+    end
+
+    -- We want to quit and only one window besides tree is left
+    if winCount == 2 then
+      vim.api.nvim_cmd({ cmd = 'qall' }, {})
+    end
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'

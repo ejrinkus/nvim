@@ -58,6 +58,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
             ['<c-d>'] = require('telescope.actions').delete_buffer,
           },
         },
+        path_display = { 'shorten' },
       },
       pickers = {
         buffers = {

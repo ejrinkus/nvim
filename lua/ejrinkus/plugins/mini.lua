@@ -16,6 +16,14 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
+    -- Quickly comment lines of code (comment style inferred from `commentstring`;
+    -- either from the current buffer or locally active tree-sitter language).
+    --
+    -- - gcc  - Toggle comment on current line
+    -- - gci{ - Toggle comment inside '{' brackets
+    -- - gcap - Toggle comment around paragraph
+    require('mini.comment').setup()
+
     -- Simple and easy statusline.
     --  You could remove this setup call if you don't like it,
     --  and try some other statusline plugin
