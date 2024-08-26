@@ -39,7 +39,10 @@ vim.keymap.set('n', '<leader>ec', ':e %:h/', { desc = "[E]dit file in [c]urrent 
 -- Navigate buffers
 -- vim.keymap.set('n', '<leader>bn', vim.cmd.bnext, { desc = '[B]uffer [N]ext' })
 -- vim.keymap.set('n', '<leader>bp', vim.cmd.bprev, { desc = '[B]uffer [P]rev' })
-vim.keymap.set('n', '<leader>bd', vim.cmd.bdelete, { desc = '[B]uffer [D]elete' })
+vim.keymap.set('n', '<leader>bd', function()
+  vim.cmd.bdelete()
+  vim.cmd.bnext()
+end, { desc = '[B]uffer [D]elete' })
 vim.keymap.set('n', '<C-A-l>', vim.cmd.bnext, { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<C-A-h>', vim.cmd.bprev, { desc = '[B]uffer [P]rev' })
 
