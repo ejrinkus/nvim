@@ -19,6 +19,12 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
+-- Alt-arrow keys resize windows
+vim.keymap.set('n', '<A-left>', '<cmd>vertical resize -2<cr>')
+vim.keymap.set('n', '<A-right>', '<cmd>vertical resize +2<cr>')
+vim.keymap.set('n', '<A-up>', '<cmd>horizontal resize -2<cr>')
+vim.keymap.set('n', '<A-down>', '<cmd>horizontal resize +2<cr>')
+
 -- Better half-page navigation (keeps cursor in center of window)
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
