@@ -16,8 +16,10 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
--- Vertical rule at column 100
+-- Vertical rule at column 100.  Also set the max line width to 100 (intended for us with gw and gq,
+-- mostly).
 vim.opt.colorcolumn = '100'
+vim.opt.textwidth = 100
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'

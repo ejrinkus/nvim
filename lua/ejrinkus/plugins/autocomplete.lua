@@ -29,7 +29,53 @@ return {
     -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
+    local fmta = require('luasnip.extras.fmt').fmta
+
     luasnip.config.setup {}
+
+    local function is_in_test_file()
+      local filename = vim.fn.expand '%:p'
+      return vim.endswith(filename, '_test.go')
+    end
+
+    luasnip.add_snippets('go', {
+      luasnip.snippet(
+        {
+          trig = 'Test',
+          name = 'Test/Subtest',
+          dscr = 'Create subtests',
+        },
+        fmta(
+          [[
+func <>(t *testing.T) {
+  testcases := []struct{
+    name string
+    <>
+  }{
+    {<>},
+  }
+  
+  for _, tc := range testcases {
+    tc := tc
+    t.Run(tc.name, func(t *testing.T) {
+      <>    
+    })
+  }
+}
+            ]],
+          {
+            luasnip.insert_node(1),
+            luasnip.insert_node(2),
+            luasnip.insert_node(3),
+            luasnip.insert_node(4),
+          }
+        ),
+        {
+          show_condition = is_in_test_file,
+          condition = is_in_test_file,
+        }
+      ),
+    })
 
     cmp.setup {
       snippet = {
