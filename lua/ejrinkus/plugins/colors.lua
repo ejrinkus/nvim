@@ -1,4 +1,8 @@
 return {
+  {
+    'xiyaowong/transparent.nvim',
+    priority = 1000,
+  },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -19,9 +23,13 @@ return {
   {
     'EdenEast/nightfox.nvim',
     priority = 1000,
+    options = {
+      transparent = true,
+    },
     init = function()
       vim.cmd 'colorscheme carbonfox'
       vim.cmd.hi 'Comment gui=none'
+      vim.g.transparent_enabled = true
     end,
   },
   {
